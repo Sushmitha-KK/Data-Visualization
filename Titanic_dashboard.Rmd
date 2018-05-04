@@ -1,0 +1,234 @@
+---
+title: "Titanic Visualization"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(dplyr)
+library(DT)
+library(ggplot2)
+
+titanic = read.csv("E:/Extra/GGPLOT2/titanic.csv",stringsAsFactors = F)
+
+titanic$Pclass <- as.factor(titanic$Pclass)
+titanic$Survived <- as.factor(titanic$Survived)
+titanic$Sex <- as.factor(titanic$Sex)
+titanic$Embarked <- as.factor(titanic$Embarked)
+```
+
+Survuval {data-navmenu="Parameters"}
+============================================================
+
+Row 
+-----------------------------------------------------------------------
+
+### Total Survival Rate
+
+```{r}
+ggplot(titanic, aes(x = Survived)) + 
+  theme_bw() +
+  geom_bar(width = 0.5) +
+  labs(y = "Passenger Count",
+title = "Titanic Survival Rates")
+
+```
+
+
+
+### With respect to sex
+
+```{r}
+ggplot(titanic, aes(x = Sex, fill = Survived)) + 
+  theme_bw() +
+  geom_bar(width = 0.5) +
+  labs(y = "Passenger Count",
+title = "Titanic Survival Rates by Sex") + scale_fill_manual(name = "Survived",values = c("0" = "red","1" = "limegreen"))
+```
+
+
+Row 
+-----------------------------------------------------------------------
+### With Respect to Class
+
+```{r}
+ggplot(titanic, aes(x = Pclass, fill = Survived)) + 
+  theme_bw() +
+  geom_bar(width = 0.5) +
+  labs(y = "Passenger Count",
+title = "Titanic Survival Rates by Pclass")+ scale_fill_manual(name = "Survived",values = c("0" = "red","1" = "limegreen"))
+```
+
+### With Respect to Class and Sex
+
+```{r}
+ggplot(titanic, aes(x = Sex, fill = Survived)) + 
+  theme_bw() +
+  facet_wrap(~ Pclass) +
+  geom_bar(width = 0.5) +
+  labs(y = "Passenger Count",
+title = "Titanic Survival Rates by Pclass and Sex")+ scale_fill_manual(name = "Survived",values = c("0" = "red","1" = "limegreen"))
+```
+
+
+
+
+Distibution {data-navmenu="Parameters"}
+=============================
+
+Column {.tabset}
+-----------------------------
+
+### With Respect to Age(Histogram)
+```{r}
+ggplot(titanic, aes(x = Age)) +
+  theme_bw() +
+  geom_histogram(binwidth = 5) +
+  labs(y = "Passenger Count",
+       x = "Age (binwidth = 5)",
+title = "Titanic Age Distribtion")
+```
+
+
+### With Respect to Age and Survival(Histogram)
+
+```{r}
+ggplot(titanic, aes(x = Age, fill = Survived)) +
+  theme_bw() +
+  geom_histogram(binwidth = 5) +
+  labs(y = "Passenger Count",
+       x = "Age (binwidth = 5)",
+title = "Titanic Survival Rates by Age")+ scale_fill_manual(name = "Survived",values = c("0" = "red","1" = "limegreen"))
+```
+
+### With Respect to Age and Survival(Boxplot)
+
+```{r}
+ggplot(titanic, aes(x = Survived, y = Age)) +
+  theme_bw() +
+  geom_boxplot() +
+  labs(y = "Age",
+       x = "Survived",
+title = "Titanic Survival Rates by Age")
+```
+
+Survival with many Parameters  {data-navmenu="Parameters"}
+===================================
+
+Column {.tabset}
+-----------------------------
+### Survival Density With Respect to Age,Sex and Class 
+
+```{r}
+ggplot(titanic, aes(x = Age, fill = Survived)) +
+  theme_bw() +
+  facet_wrap(Sex ~ Pclass) +
+  geom_density(alpha = 0.5) +
+  labs(y = "Age",
+       x = "Survived",
+       title = "Titanic Survival Rates by Age, Pclass and Sex")+ scale_fill_manual(name = "Survived",values = c("0" = "red","1" = "limegreen"))
+```
+
+### Survival Distribution With Respect to Age,Sex and Class 
+
+```{r}
+ggplot(titanic, aes(x = Age, fill = Survived)) +
+  theme_bw() +
+  facet_wrap(Sex ~ Pclass) +
+  geom_histogram(binwidth = 5) +
+  labs(y = "Age",
+       x = "Survived",
+title = "Titanic Survival Rates by Age, Pclass and Sex")+ scale_fill_manual(name = "Survived",values = c("0" = "red","1" = "limegreen"))
+```
+
+Survival Percentage {data-navmenu="Parameters" data-orientation=rows}
+==============================================================
+
+Row
+---------------------------
+
+
+```{r}
+
+m = titanic %>% filter(Sex == "male") %>% summarise(t_m = n())
+f = titanic %>% filter(Sex == "male") %>% summarise(t_m = n())
+```
+
+### Male Count
+```{r}
+
+valueBox(round(m,2),icon = "fa fa-male",color = 'royalblue')
+
+
+
+```
+
+
+
+
+### Female Count
+```{r}
+
+
+valueBox(round(f,2),icon = "fa fa-female",color = 'pink')
+```
+
+
+
+
+
+Row
+---------------------------
+
+### Survival Percentage
+
+```{r}
+ggplot(titanic,aes(x = 1,y = sort(titanic$Survived),fill = sort(titanic$Survived)))+geom_bar(stat = "identity")+coord_polar(theta = 'y')+theme(panel.background = element_blank(),axis.text = element_blank(),axis.ticks = element_blank(),axis.title.y = element_blank())+labs(y = "Survival ratio")+ scale_fill_manual(name = "Survived",values = c("0" = "red","1" = "limegreen"))
+```
+
+Data {data-orientation=rows}
+===============================
+
+Row
+-----------------------------
+
+
+###Proportion of not survived
+
+```{r}
+p = prop.table(table(titanic$Survived))
+p = as.data.frame(p)
+```
+
+```{r}
+
+valueBox(round(p[1,2],4),icon = "fa fa-ship",color = "red")
+```
+
+
+
+###Proportion of survived
+```{r}
+
+valueBox(round(p[2,2],4),icon = "fa fa-ship",color = "limegreen")
+```
+
+
+
+Row
+----------------------
+
+### Titanic Data
+
+```{r}
+
+DT::datatable(titanic,options = list(
+  bPaginate = T,
+  pageLength = 5
+))
+
+```
+
