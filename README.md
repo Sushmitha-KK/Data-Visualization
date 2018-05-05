@@ -11,4 +11,9 @@
   - Ditribution of data with Respect to Age(Histogram)
   - Ditribution of data with Respect to Age and Survival(Histogram)
   - Ditribution of data with Respect to Age and Survival(Boxplot)
-- [Titanic Dashboard](https://htmlpreview.github.io/?https://github.com/Sushmitha-KK/Data-Visualization/blob/master/Titanic_dashboard.html)
+- Third page contains Survival Density with respect to several parameters.
+  - Survival Density With Respect to Age,Sex and Class
+  - Survival Distribution With Respect to Age,Sex and Class
+- Next page contains survival ratio and count of male and female on Titanic
+
+- To view the inter active dashboard click on [Titanic Dashboard](https://htmlpreview.github.io/?https://github.com/Sushmitha-KK/Data-Visualization/blob/master/Titanic_dashboard.html)
