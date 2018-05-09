@@ -17,3 +17,7 @@
 - Next page contains survival ratio and count of male and female on Titanic
 
 - To view the inter active dashboard click on [Titanic Dashboard](https://htmlpreview.github.io/?https://github.com/Sushmitha-KK/Data-Visualization/blob/master/Titanic_dashboard.html)
+
+
+## 2)Dashboard for Manipal Call Centre Analysis
+- 
