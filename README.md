@@ -1,6 +1,6 @@
 # Data-Visualization
 
-## Visualization done on Titanic data set with help of Dashboard
+## 1)Visualization done on Titanic data set with help of Dashboard
 - This dashboard contains several pages on Analysis.
 - First page contains survival count with respect to different categories.
   - Total Survival Rate
