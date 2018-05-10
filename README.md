@@ -20,4 +20,9 @@
 
 
 ## 2)Dashboard for Manipal Call Centre Analysis
--[Call Centre Analysis App](https://sushmitha-kk.shinyapps.io/Manipal_Call_centre_analysis_app/#section-enrollment)
+- This dashboard contains analysis of Manipal call centre using Visualization.
+- Whole analysis is divided into 3 parts
+  - 1.Enrollment
+  - 2.Revenue
+  - 3.Work force stratagy
+- [Call Centre Analysis App](https://sushmitha-kk.shinyapps.io/Manipal_Call_centre_analysis_app/#section-enrollment)
