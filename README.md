@@ -32,7 +32,7 @@
   - Secondly a Pareto graph is plotted to explain the 80-20 rule of revenue.
   - Then orders failed for each councelor is explained with the help of a lolipop chart.
   - Finally the revenue generated from total calls made by each councelor is plotted.
-### 3. Work force Stratagy
+#### 3. Work force Stratagy
   - Change in office timings
   - No of days of work in general for a councellor
   - City wise distribution of enrollments and number of students being disturbed by the call centre.
